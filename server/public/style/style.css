@@ -1,0 +1,42 @@
+.header {
+    background-color: pink;
+    padding: 4em;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+#submitButton { 
+    background-color: pink;
+    padding: 10px 24px;
+    border-radius: 50%;
+    border : 2px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+}
+
+#submitButton:hover { 
+    background-color: white; 
+    color: black;
+}
+
+ body {
+    background-color: lightgrey;
+ }   
+
+.inputs {
+    padding-left: 0em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-top: 2em;
+}
+
+.taskToDo {
+    padding-left: 0em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+#createTask {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+}
