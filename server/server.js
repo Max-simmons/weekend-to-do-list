@@ -25,7 +25,53 @@ app.get('/tasks', (req, res) => {
       console.log('SQL query in GET /tasks failed', dbErr)
       res.sendStatus(500);
     })
+})
+
+app.post('/tasks', (req,res) => {
+  console.log('POST /tasks');
+
+  let taskName = req.body.task;
+
+  let sqlText = `
+  INSERT INTO "toDoApp"
+  ("task")
+  VALUES
+  ($1);
+  `;
+  let sqlValues = [taskName]
+
+  pool.query(sqlText, sqlValues)
+  .then((dbRes) => {
+    res.sendStatus(201);
+  })
+  .catch((dbErr) => {
+    console.log('POST /tasks error:', dbErr);
+    res.sendStatus(500);
+  })
+})
+
+app.delete('/tasks/:id', (req, res) => {
+  console.log(req.params);
+
+  let theIdToDelete = req.params.id;
+
+  let sqlText = `
+  DELETE FROM "toDoApp"
+    WHERE "id"=$1;
+    `
   
+    let sqlValues = [theIdToDelete]
+
+    pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+     
+      res.sendStatus(200); 
+    })
+    .catch((dbErr) => {
+      console.log('delete /tasks error:', dbErr);
+      
+      res.sendStatus(500);
+    })
 })
 
 
