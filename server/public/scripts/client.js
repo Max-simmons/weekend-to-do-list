@@ -19,18 +19,20 @@ function fetchAndRenderTasks() {
             <button class="deleteButton">❌</button></li>
             `)}
             if(task.done === 'Done'){
-                $('.taskToDo').css("background-color", "green")
+                $('.taskToDo').css("background-color", "lightgreen", "padding-right", "4em")
             }
-            // if (task.done === 'Done'){
-            //     $(this).addClass("green")
-            // }
             else {
                 $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
                 <button class= "doneButton">✅</button>
                 <button class="deleteButton">❌</button></li>
                 `)
-                
             }
+            
+            // if (task.done !== 'Done') {
+            //     $('.taskTodo').css("background-color", "lightgrey")
+            // }
+                
+
         }   
      
     })
@@ -52,6 +54,9 @@ function createTasks(event) {
     }).then(function(response){
         fetchAndRenderTasks();
     })
+
+    $('#createTask').val('');
+    $('#taskDone').val('');
 }
 
 function deleteTask() {
@@ -84,8 +89,5 @@ function taskDone() {
     })
 }
 
-// function displayTask() {
-//     if (task.done === 'Done'){
-//         $(this).addClass('green')
-//      }
+
 
