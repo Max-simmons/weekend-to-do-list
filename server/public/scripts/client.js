@@ -14,8 +14,22 @@ function fetchAndRenderTasks() {
     }).then(function(response) {
         $('#tasksList').empty();
         for(let task of response){
-            $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}<button class= "doneButton">✅</button><button class="deleteButton">❌</button>`)
-        }
+            if (task.done === 'Done') {
+            $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
+            <button class="deleteButton">❌</button></li>
+            `)}
+            if (task.done === 'Done'){
+                $(this).addClass("green")
+            }
+            else {
+                $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
+                <button class= "doneButton">✅</button>
+                <button class="deleteButton">❌</button></li>
+                `)
+                
+            }
+        }   
+     
     })
 }
 
@@ -66,3 +80,9 @@ function taskDone() {
 
     })
 }
+
+// function displayTask() {
+//     if (task.done === 'Done'){
+//         $(this).addClass('green')
+//      }
+
