@@ -31,14 +31,15 @@ app.post('/tasks', (req,res) => {
   console.log('POST /tasks');
 
   let taskName = req.body.task;
+  let taskStatus = req.body.done;
 
   let sqlText = `
   INSERT INTO "toDoApp"
-  ("task")
+  ("task", "done")
   VALUES
-  ($1);
+  ($1, $2);
   `;
-  let sqlValues = [taskName]
+  let sqlValues = [taskName, taskStatus]
 
   pool.query(sqlText, sqlValues)
   .then((dbRes) => {
@@ -70,6 +71,29 @@ app.delete('/tasks/:id', (req, res) => {
     .catch((dbErr) => {
       console.log('delete /tasks error:', dbErr);
       
+      res.sendStatus(500);
+    })
+})
+
+app.put('/tasks/:id', (req, res) => {
+
+  let theIdToUpdate = req.params.id;
+
+  let taskDone = req.body.done;
+
+  let sqlText = `
+  UPDATE "toDoApp"
+    SET "done"=$1
+    WHERE "id"=$2;
+`
+let sqlValues = [taskDone, theIdToUpdate];
+
+pool.query(sqlText, sqlValues)
+    .then((dbRes) => {
+      res.sendStatus(200);
+    })
+    .catch((dbErr) => {
+      console.log('PUT /tasks/:id fail:', dbErr);
       res.sendStatus(500);
     })
 })

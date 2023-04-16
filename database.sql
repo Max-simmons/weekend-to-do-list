@@ -1,16 +1,19 @@
 CREATE TABLE "toDoApp" (
 	"id" SERIAL PRIMARY KEY,
-	"task" VARCHAR(100)
+	"task" VARCHAR(100),
+	"done" VARCHAR (10)
 	);
 	
 INSERT INTO "toDoApp"
-	("task")
+	("task", "done")
 	VALUES
-	('Walk the Dog');
+	('Walk the Dog', 'Not Done');
 	
 INSERT INTO "toDoApp"
-	("task")
+	("task", "done")
 	VALUES
-	('Mow the Lawn'),
-	('Clean the Dishes'),
-	('Take out the trash');
+	('Mow the Lawn', 'Not Done'),
+	('Clean the Dishes', 'Done'),
+	('Take out the trash', 'Not Done');
+	
+

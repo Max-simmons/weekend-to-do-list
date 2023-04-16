@@ -4,6 +4,7 @@ function onReady(){
     fetchAndRenderTasks();
     $('#submitButton').on('click', createTasks);
     $('#tasksList').on('click', '.deleteButton', deleteTask);
+    $('#tasksList').on('click', '.doneButton', taskDone);
 }
 
 function fetchAndRenderTasks() {
@@ -13,7 +14,7 @@ function fetchAndRenderTasks() {
     }).then(function(response) {
         $('#tasksList').empty();
         for(let task of response){
-            $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task}<button class= "doneButton">✅</button><button class="deleteButton">❌</button>`)
+            $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}<button class= "doneButton">✅</button><button class="deleteButton">❌</button>`)
         }
     })
 }
@@ -22,12 +23,14 @@ function createTasks(event) {
     event.preventDefault();
 
     let newTask = $('#createTask').val();
+    let taskDone = $('#taskDone').val();
 
     $.ajax({
         method: 'POST',
         url: '/tasks',
         data: {
-            task: newTask
+            task: newTask,
+            done: taskDone
         }
     }).then(function(response){
         fetchAndRenderTasks();
@@ -44,5 +47,22 @@ function deleteTask() {
         fetchAndRenderTasks();
     }).catch(function(error) {
       alert('broken');  
+    })
+}
+
+function taskDone() {
+    let idToUpdate = $(this).parent().data('id');
+
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${idToUpdate}`,
+        data:{
+            done: 'Done'
+        }
+    }).then(function(response){
+        fetchAndRenderTasks()
+    }).catch(function(error){
+        console.log('Done update failed', error);
+
     })
 }
