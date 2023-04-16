@@ -18,9 +18,12 @@ function fetchAndRenderTasks() {
             $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
             <button class="deleteButton">❌</button></li>
             `)}
-            if (task.done === 'Done'){
-                $(this).addClass("green")
+            if(task.done === 'Done'){
+                $('.taskToDo').css("background-color", "green")
             }
+            // if (task.done === 'Done'){
+            //     $(this).addClass("green")
+            // }
             else {
                 $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
                 <button class= "doneButton">✅</button>
