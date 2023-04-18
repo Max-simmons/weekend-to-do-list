@@ -11,32 +11,34 @@ function fetchAndRenderTasks() {
     $.ajax({
         method: 'GET',
         url: '/tasks'
-    }).then(function(response) {
+    }).then((response) => {
         $('#tasksList').empty();
-        for(let task of response){
-            if (task.done === 'Done') {
-            $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
-            <button class="deleteButton">❌</button></li>
-            `)}
-            if(task.done === 'Done'){
-                $('.taskToDo').css("background-color", "lightgreen", "padding-right", "4em")
-            }
-            else {
-                $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
-                <button class= "doneButton">✅</button>
-                <button class="deleteButton">❌</button></li>
-                `)
-            }
+        handleRendering(response);
+    })
+        // for(let task of response){
+        //     if (task.done === 'Done') {
+        //     $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
+        //     <button class="deleteButton">❌</button></li>
+        //     `)}
+        //     if(task.done === 'Done'){
+        //         $('.taskToDo').css("background-color", "lightgreen", "padding-right", "4em")
+        //     }
+        //     else {
+        //         $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
+        //         <button class= "doneButton">✅</button>
+        //         <button class="deleteButton">❌</button></li>
+        //         `)
+        //     }
             
             // if (task.done !== 'Done') {
             //     $('.taskTodo').css("background-color", "lightgrey")
             // }
                 
 
-        }   
+        // }   
      
-    })
-}
+//     })
+// }
 
 function createTasks(event) {
     event.preventDefault();
@@ -89,5 +91,22 @@ function taskDone() {
     })
 }
 
-
+function handleRendering(tasks){
+for(let task of response){
+    if (task.done === 'Done') {
+    $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
+    <button class="deleteButton">❌</button></li>
+    `)
+}
+    if(task.done === 'Done'){
+        $('.taskToDo').css("background-color", "lightgreen", "padding-right", "4em")
+    }
+    else {
+        $('#tasksList').append(`<li class="taskToDo" data-id=${task.id}>${task.task} is ${task.done}
+        <button class= "doneButton">✅</button>
+        <button class="deleteButton">❌</button></li>
+        `);
+    }
+}
+}
 
