@@ -85,10 +85,11 @@ function taskDone() {
         }
     }).then(function(response){
         fetchAndRenderTasks()
-    }).catch(function(error){
+    }).catch(error) => {
+        handleErrors(error)
         console.log('Done update failed', error);
 
-    })
+    }
 }
 
 function handleRendering(tasks){
@@ -110,3 +111,7 @@ for(let task of response){
 }
 }
 
+function handleErrors(errorMessage, errorObject) {
+    console.log(errorMessage, errorObject);
+    $('#errorMessage').text(errorMessage);
+}
